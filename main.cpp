@@ -19,6 +19,70 @@ Texture loadtexture(const string &filename_with_path){
     }
     return texture;
 }
+void tworzenie_scian(vector<unique_ptr<Sprite>> &otoczenie, Texture &sciana_tekstura,Texture &blok_tekstura,RenderWindow &window, Bohater &postac){
+    auto block0=make_unique<Sprite>();
+    block0->setTexture(blok_tekstura);
+    block0->setPosition(0,window.getSize().y-50);
+    block0->setTextureRect(IntRect(0,0,window.getSize().x,50));
+    otoczenie.emplace_back(move(block0));
+
+    auto block1=make_unique<Sprite>();
+    block1->setTexture(blok_tekstura);
+    block1->setPosition(150,window.getSize().y-50-postac.getGlobalBounds().height);
+    block1->setScale(0.5,0.43);
+    otoczenie.emplace_back(move(block1));
+
+    auto block2=make_unique<Sprite>();
+    block2->setTexture(blok_tekstura);
+    block2->setPosition(214,window.getSize().y-50-2*postac.getGlobalBounds().height);
+    block2->setScale(0.5,0.86);
+    otoczenie.emplace_back(move(block2));
+
+
+    auto wall2=make_unique<Sprite>();
+    wall2->setTexture(sciana_tekstura);
+    wall2->setPosition(385,window.getSize().y-152);
+    wall2->setScale(3,0.2);
+    otoczenie.emplace_back(move(wall2));
+
+    auto block3=make_unique<Sprite>();
+    block3->setTexture(blok_tekstura);
+    block3->setPosition(window.getSize().x/2+200,window.getSize().y-50-1*postac.getGlobalBounds().height);
+    block3->setScale(0.5,0.43);
+    otoczenie.emplace_back(move(block3));
+
+    auto block4=make_unique<Sprite>();
+    block4->setTexture(blok_tekstura);
+    block4->setPosition(window.getSize().x/2+264,window.getSize().y-50-2*postac.getGlobalBounds().height);
+    block4->setScale(2.5,0.86);
+    otoczenie.emplace_back(move(block4));
+
+    auto block5=make_unique<Sprite>();
+    block5->setTexture(blok_tekstura);
+    block5->setPosition(window.getSize().x/2+584,window.getSize().y-50-3*postac.getGlobalBounds().height);
+    block5->setScale(2,1.29);
+    otoczenie.emplace_back(move(block5));
+
+    auto wall3=make_unique<Sprite>();
+    wall3->setTexture(sciana_tekstura);
+    wall3->setScale(1.75,0.2);
+    wall3->setPosition(window.getSize().x/2+264,window.getSize().y-50-3*postac.getGlobalBounds().height-30);
+    otoczenie.emplace_back(move(wall3));
+
+    auto block6=make_unique<Sprite>();
+    block6->setTexture(blok_tekstura);
+    block6->setPosition(window.getSize().x/2-210,window.getSize().y-80-3*postac.getGlobalBounds().height);
+    block6->setTextureRect(IntRect(0,0,128,64));
+    block6->setScale(2.8,0.5);
+    otoczenie.emplace_back(move(block6));
+
+    auto block7=make_unique<Sprite>();
+    block7->setTexture(blok_tekstura);
+    block7->setPosition(window.getSize().x/2-594,window.getSize().y-80-4*postac.getGlobalBounds().height);
+    //block7->setTextureRect(IntRect(0,0,128,64));
+    block7->setScale(3,0.43);
+    otoczenie.emplace_back(move(block7));
+}
 
 
 
@@ -32,64 +96,32 @@ int main()
 
     //Texture platformy_tekstura=loadtexture("./../Projekt_proba1/Environment/ground_grass_small.png");
     //platformy_tekstura.setRepeated(true);
-    Texture bohater_tekstura=loadtexture("./../Projekt_proba2/Players/bunny1_walk2.png");
-    Texture sciana_tekstura=loadtexture("./../Projekt_proba2/wall.png");
-    Texture przeciwnik_tekstura=loadtexture("./../Projekt_proba2/Players/bunny2_walk2.png");
+    Texture bohater_tekstura=loadtexture("./../Projekt_proba2/john_static.png");
+    Texture sciana_tekstura=loadtexture("./../Projekt_proba2/grass.png");
+    Texture blok_tekstura=loadtexture("./../Projekt_proba2/grassMid.png");
+    Texture przeciwnik_tekstura=loadtexture("./../Projekt_proba2/grunt.png");
     sciana_tekstura.setRepeated(true);
+    blok_tekstura.setRepeated(true);
 
     vector<unique_ptr<Sprite>> otoczenie;
 
-    //auto platforma1=make_unique<Sprite>();
-    //platforma1->setTexture(platformy_tekstura);
-    //platforma1->setPosition(0,1240);
-    //platforma1->setTextureRect(IntRect(0,1240,1500,100));
-    //otoczenie.emplace_back(move(platforma1));
-
-    //auto platforma2=make_unique<Sprite>();
-    //platforma2->setTexture(platformy_tekstura);
-    //platforma2->setPosition(0,940);
-    //platforma2->setTextureRect(IntRect(0,940,1500,50));
-    //otoczenie.emplace_back(move(platforma2));
-
-    //auto platforma3=make_unique<Sprite>();
-    //platforma3->setTexture(platformy_tekstura);
-    //platforma3->setPosition(0,640);
-    //platforma3->setTextureRect(IntRect(0,640,1500,50));
-    //otoczenie.emplace_back(move(platforma3));
-
-    //walls
-    auto wall1=make_unique<Sprite>();
-    wall1->setTexture(sciana_tekstura);
-    wall1->setPosition(0,1240);
-    wall1->setTextureRect(IntRect(0,1240,1500,100));
-    otoczenie.emplace_back(move(wall1));
-
-    auto wall2=make_unique<Sprite>();
-    wall2->setTexture(sciana_tekstura);
-    wall2->setPosition(0,940);
-    wall2->setTextureRect(IntRect(0,940,1500,50));
-    otoczenie.emplace_back(move(wall2));
-
-    auto wall3=make_unique<Sprite>();
-    wall3->setTexture(sciana_tekstura);
-    wall3->setPosition(0,640);
-    wall3->setTextureRect(IntRect(0,640,1500,50));
-    otoczenie.emplace_back(move(wall3));
-
-    auto wall4=make_unique<Sprite>();
-    wall4->setTexture(sciana_tekstura);
-    wall4->setPosition(900,300);
-    wall4->setTextureRect(IntRect(0,640,1500,50));
-    otoczenie.emplace_back(move(wall4));
 
     //postac
-    Vector2f position(100, 100);
+    Vector2f position(50, window.getSize().y-80);
     Bohater postac(position);
-    postac.setScale(0.4, 0.4);
+    postac.setScale(2.5,2.5);
     postac.setOrigin(float(bohater_tekstura.getSize().x) / 2, float(bohater_tekstura.getSize().y) / 2);
     postac.setTexture(bohater_tekstura);
     postac.setBounds(0, window.getSize().x, 0, window.getSize().y);
     postac.setSpeed(200, 200);
+    //walls
+    tworzenie_scian(otoczenie,sciana_tekstura,blok_tekstura,window, postac);
+
+
+
+
+
+
     //przeciwnik
     //vector<unique_ptr<Sprite>> przeciwnicy;
     //auto przeciwnik1=make_unique<Przeciwnik>(Vector2f(0.4,0.4));
@@ -110,21 +142,45 @@ int main()
 
     //----------------
     vector<Przeciwnik> enemies;
-    Przeciwnik enemy1(Vector2f(0.4,0.4));
+    Przeciwnik enemy1(Vector2f(-2.5,2.5));
     enemy1.setTexture(przeciwnik_tekstura);
-    enemy1.set_position(Vector2f(100,200));
+    enemy1.set_position(Vector2f(400,window.getSize().y-80));
     enemy1.setOrigin(float(przeciwnik_tekstura.getSize().x) / 2, float(przeciwnik_tekstura.getSize().y) / 2);
     enemy1.shot_cooldown.restart();
-    enemy1.setBounds(0,1600);
+    enemy1.setBounds(280,window.getSize().x/2+200);
     enemies.emplace_back(enemy1);
 
-    Przeciwnik enemy2(Vector2f(0.4,0.4));
+    Przeciwnik enemy2(Vector2f(-2.5,2.5));
     enemy2.setTexture(przeciwnik_tekstura);
-    enemy2.set_position(Vector2f(500,500));
+    enemy2.set_position(Vector2f(700,window.getSize().y-80));
     enemy2.setOrigin(float(przeciwnik_tekstura.getSize().x) / 2, float(przeciwnik_tekstura.getSize().y) / 2);
     enemy2.shot_cooldown.restart();
-    enemy2.setBounds(400,800);
+    enemy2.setBounds(280,window.getSize().x/2+200);
     enemies.emplace_back(enemy2);
+
+    Przeciwnik enemy3(Vector2f(-2.5,2.5));
+    enemy3.setTexture(przeciwnik_tekstura);
+    enemy3.set_position(Vector2f(400,window.getSize().y-178));
+    enemy3.setOrigin(float(przeciwnik_tekstura.getSize().x) / 2, float(przeciwnik_tekstura.getSize().y) / 2);
+    enemy3.shot_cooldown.restart();
+    enemy3.setBounds(385,769);
+    enemies.emplace_back(enemy3);
+
+    Przeciwnik enemy4(Vector2f(-2.5,2.5));
+    enemy4.setTexture(przeciwnik_tekstura);
+    enemy4.set_position(Vector2f(window.getSize().x/2+300,window.getSize().y-76-2*postac.getGlobalBounds().height));
+    enemy4.setOrigin(float(przeciwnik_tekstura.getSize().x) / 2, float(przeciwnik_tekstura.getSize().y) / 2);
+    enemy4.shot_cooldown.restart();
+    enemy4.setBounds(window.getSize().x/2+264,window.getSize().x/2+584);
+    enemies.emplace_back(enemy4);
+
+    Przeciwnik enemy5(Vector2f(-2.5,2.5));
+    enemy5.setTexture(przeciwnik_tekstura);
+    enemy5.set_position(Vector2f(window.getSize().x/2,627));
+    enemy5.setOrigin(float(przeciwnik_tekstura.getSize().x) / 2, float(przeciwnik_tekstura.getSize().y) / 2);
+    enemy5.shot_cooldown.restart();
+    enemy5.setBounds(window.getSize().x/2-210,window.getSize().x/2+150);
+    enemies.emplace_back(enemy5);
 
     //pocisk       
     bool wystrzelony=false;
@@ -175,6 +231,23 @@ int main()
             wrogi_pocisk.set_speed(wrogi_pocisk.getFacing() ? 3 : -3);
         }
 
+        //otoczenie a pociski
+        for(auto &wystrzelony_pocisk : Pocisk::wystrzelone_pociski){
+            for(auto &sciana : otoczenie){
+                if(wystrzelony_pocisk.check_collision(*sciana)){
+                    wystrzelony_pocisk.set_position(Vector2f(10000,10000));
+                }
+            }
+        }
+
+        for(auto &wystrzelony_pocisk : Pocisk::wrogie_pociski){
+            for(auto &sciana : otoczenie){
+                if(wystrzelony_pocisk.check_collision(*sciana)){
+                    wystrzelony_pocisk.set_position(Vector2f(10000,10000));
+                }
+            }
+        }
+
 
         //przeciwnik a pocisk
         for(auto &wystrzelony_pocisk : Pocisk::wystrzelone_pociski){
@@ -212,11 +285,11 @@ int main()
                     postac.getGlobalBounds().top>enemy.getGlobalBounds().top-enemy.getGlobalBounds().height and
                     postac.getGlobalBounds().top+postac.getGlobalBounds().height<enemy.getGlobalBounds().top+2*enemy.getGlobalBounds().height){
                 if(postac.getGlobalBounds().left<enemy.getGlobalBounds().left){
-                    enemy.setScale(-0.4,0.4);
+                    enemy.setScale(-2.5,2.5);
                     enemy.setFacing(false);
                 }
                 if(postac.getGlobalBounds().left>enemy.getGlobalBounds().left){
-                    enemy.setScale(0.4,0.4);
+                    enemy.setScale(2.5,2.5);
                     enemy.setFacing(true);
                 }
 

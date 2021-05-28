@@ -17,10 +17,12 @@ void Przeciwnik::animate(const Time &elapsed){
     set_kierunek_ruchu();
     float droga=speed_x*sec;
     if(!kierunek_ruchu){
+        setScale(-2.5,2.5);
         move(-std::abs(droga),0);
         setFacing(false);
     }
     else{
+        setScale(2.5,2.5);
         move(std::abs(droga),0);
         setFacing(true);
     }
@@ -32,11 +34,11 @@ void Przeciwnik::setBounds(float left, float right){
 void Przeciwnik::set_kierunek_ruchu(){
     if(getGlobalBounds().left<=left_borderline){
         kierunek_ruchu=true;
-        setScale(0.4,0.4);
+        setScale(2.5,2.5);
     }
     if(getGlobalBounds().left+getGlobalBounds().width>=right_borderline){
         kierunek_ruchu=false;
-        setScale(-0.4,0.4);
+        setScale(-2.5,2.5);
     }
 }
 

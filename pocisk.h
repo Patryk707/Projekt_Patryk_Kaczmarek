@@ -28,7 +28,7 @@ public:
 
 
 private:
-    const float promien_pocisku=5.0f;
+    const float promien_pocisku=4.0f;
     bool facing;
 
 

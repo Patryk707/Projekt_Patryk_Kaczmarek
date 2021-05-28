@@ -67,7 +67,7 @@ void Bohater::animate(const Time &elapsed){
         setSpeed(-200,0);
         current_position_x=speed_x*sec;
         current_position_y=speed_y*sec;
-        setScale(-0.4,0.4);
+        setScale(-2.5,2.5);
         setFacing(false);
         //this->setPosition(potential_position_x,potential_position_y);
 
@@ -83,7 +83,7 @@ void Bohater::animate(const Time &elapsed){
          setSpeed(200, 0);
          current_position_x = speed_x * sec;
          current_position_y = speed_y * sec;
-         setScale(0.4f, 0.4f);
+         setScale(2.5,2.5);
          setFacing(true);
          move(current_position_x, current_position_y);
 
@@ -127,9 +127,7 @@ bool Bohater::check_collision(const vector<unique_ptr<Sprite>> &walls ){
     return false;
 }
 void Bohater::collision(const vector<unique_ptr<Sprite>> &walls, const Time &elapsed){
-    float sec = elapsed.asSeconds();
-    //float droga_x=sec*speed_x;
-    //float droga_y=sec*speed_y;
+
     this->setSpeed(0,0);
     if(!check_collision(walls)){
         this->setSpeed(200,200);
